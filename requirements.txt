@@ -1,6 +1,7 @@
 # Python dependencies
-opencv-python>=4.8.0
-opencv-contrib-python>=4.8.0
+# Updated versions to address security vulnerabilities
+opencv-python>=4.8.1.78
+opencv-contrib-python>=4.8.1.78
 numpy>=1.24.0
-Pillow>=10.0.0
+Pillow>=10.2.0
 PyAutoGUI>=0.9.54
