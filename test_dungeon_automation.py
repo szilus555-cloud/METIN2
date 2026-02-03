@@ -129,7 +129,7 @@ class TestConfigurationFile(unittest.TestCase):
         import json
         
         config_path = Path('config.json')
-        with open(config_path, 'r') as f:
+        with open(config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
         
         # Check required fields

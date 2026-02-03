@@ -60,8 +60,10 @@ class DungeonAutomation:
         self.confidence = config.get('confidence', 0.8)
         self.delay = config.get('delay', 0.5)
         self.max_attempts = config.get('max_attempts', 3)
+        self.attack_cycles = config.get('attack_cycles', 3)
         self.dungeon_completed = False
         self.security_issues = []
+        self.last_side_check_time = 0
         
         # Ensure images directory exists
         self.images_path.mkdir(exist_ok=True)
@@ -257,7 +259,7 @@ class DungeonAutomation:
             time.sleep(0.5)
             
             # Use skills in rotation
-            for _ in range(3):  # Attack 3 times
+            for _ in range(self.attack_cycles):
                 for key in skill_keys:
                     self.press_key(key)
                     time.sleep(0.3)
@@ -309,9 +311,11 @@ class DungeonAutomation:
             self.move_character('forward', duration=2)
             time.sleep(1)
             
-            # Occasionally check sides
-            if int(time.time() - start_time) % 10 == 0:
+            # Occasionally check sides (every 10 seconds)
+            current_time = time.time()
+            if current_time - self.last_side_check_time >= 10:
                 self.move_character('right', duration=1)
+                self.last_side_check_time = current_time
                 time.sleep(0.5)
         
         if not self.dungeon_completed:
@@ -422,6 +426,7 @@ def load_config() -> dict:
         'delay': 0.5,
         'max_attempts': 3,
         'max_dungeon_time': 300,
+        'attack_cycles': 3,
         'skill_keys': ['1', '2', '3']
     }
     
