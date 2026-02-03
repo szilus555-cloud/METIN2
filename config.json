@@ -1,0 +1,10 @@
+{
+  "images_path": "images",
+  "confidence": 0.8,
+  "delay": 0.5,
+  "max_attempts": 3,
+  "max_dungeon_time": 300,
+  "attack_cycles": 3,
+  "skill_keys": ["1", "2", "3"],
+  "description": "Configuration for Metin2 Dungeon Automation Script"
+}
